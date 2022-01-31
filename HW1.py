@@ -29,24 +29,14 @@ print("List: ", ListX)
 print("Tuple: ", TupleX)
 print("Set: ", SetX)
 print("Frozen_set: ", Frozen_setX)
-
+print("DictX: ", DictX)
+# 11) Создать 2 переменные String, создать переменную в которой сканкатенируете эти переменные. Вывести в консоль.
 String1 = "Pi "
 String2 = "3,14 "
 String3 = String1 + String2
-
 print("String3: ", String3)
-
-print(StringX, IntegerX)
-print(StringX + " " + str(IntegerX))
-
-
-
-
-
-
-# 11) Создать 2 переменные String, создать переменную в которой сканкатенируете эти переменные. Вывести в консоль.
 # 12) Вывести в одну строку переменные типа String и Integer используя “,” (Запятую)
+print(StringX, IntegerX)
 # 13) Вывести в одну строку переменные типа String и Integer используя “+” (Плюс)
-#
-
+print(StringX + " " + str(IntegerX))
 
