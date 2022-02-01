@@ -1,14 +1,18 @@
 
 
-def create():
+def create_user(email, name, password, phone, user_emails, user_storage):
     print("start create")
-    print("please input email")
-    email=input()
-    print("please input name")
-    name = input()
-    print("please input phone")
-    phone = input()
-    user_dict("userID").append("")
+    user_info=[email, name, password, phone]
+    user_emails.append(email)
+    user_storage[email]={
+        "name":name,
+        "password":password,
+        "phone":phone
+    }
+
+    print("Добавлен пользователь: ", user_info)
+    return None
+
 
 
 # users = {
