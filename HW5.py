@@ -5,15 +5,18 @@ from CRUD_create import create_user
 from CRUD_read import read_one, read_all
 from CRUD_update import update
 from CRUD_delete import delete
+from User_generator import generate
 from test import test
 
 user_emails = []
 user_storage = {}
 email_have = False
+filename = ""
+user_qty = 0
 
 def menu():
     global email_have
-    help =('exit = close program; 1 = create user; 2 = read user; 3 = update user; 4 = delete user; help = help')
+    help =('exit = close program; 1 = create user; 2 = read user; 3 = update user; 4 = delete user; 5 = file; 6 = generate users; help = help')
     print(help)
     cmd = input("Вы в главном меню. Введите команду: ")
     while cmd != "exit":
@@ -63,11 +66,54 @@ def menu():
             print("user_emails: ", user_emails)
             print("user_storage: ", user_storage)
         elif cmd == "4":
-            delete()
+            print("Выбрана 4 = delete user. Введите данные пользователя")
+            email = input("Email: ")
+            delete(email, user_storage, user_emails, email_have)
         elif cmd == "help":
             print(help)
         elif cmd == "test":
             test()
+        elif cmd == "5":
+            print("Выбрана 5 = file")
+            help3 = ("1 = create file; 2 = read file; 3 = update file; 4 = delete file; 5 = show files; 0 = return to main menu; help = help")
+            print(help3)
+            cmd3 = input("Вы в меню работы с файлами. Введите команду: ")
+            while cmd3 != "0":
+                if cmd3 == "1":
+                    print("Выбрана 1 = create file. Введите название файла: ")
+                    filename = input("Filename: ")
+
+                elif cmd3 == "2":
+                    print("Выбрана 2 = read file")
+                    filename = input("Filename: ")
+
+                elif cmd3 == "3":
+                    print("Выбрана 3 = update file")
+                    filename = input("Filename: ")
+
+                elif cmd3 == "4":
+                    print("Выбрана 4 = delete file")
+                    filename = input("Filename: ")
+
+                elif cmd3 == "5":
+                    print("Выбрана 5 = show files")
+                    filename = input("Filename: ")
+
+                elif cmd3 == "help":
+                    print(help3)
+                elif cmd3 == "exit":
+                    sys.exit()
+                else:
+                    print("Введенной команды не существует")
+                    print(help3)
+                cmd3 = input("Вы в меню работы с файлами. Введите команду: ")
+
+        elif cmd == "6":
+            print("Выбрана 6 = generate users. Операция перезапишет текущие данные. Для отмены операции оставьте поле ввода количества пустым")
+            user_qty = input("Введите количество пользователей для генерации: ")
+            if user_qty != "" and user_qty != 0:
+                generate(user_qty, user_emails, user_storage)
+
         elif cmd == "":
             print("Введенной команды не существует")
             print(help)

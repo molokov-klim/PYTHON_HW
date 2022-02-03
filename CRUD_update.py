@@ -40,6 +40,8 @@ def update(email, user_emails, user_storage, email_have):
     for key in user_storage:
         if email == key:
             email_have = True
+        if new_email == key:
+            email_have = True
     if email_have:
         new_name = input("Введите новый name (оставьте пустым чтобы не вносить изменений): ")
         if new_name != "":
