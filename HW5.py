@@ -1,4 +1,5 @@
 import os
+from tkinter import filedialog
 import shutil
 import sys
 from CRUD_create import create_user
@@ -7,6 +8,53 @@ from CRUD_update import update
 from CRUD_delete import delete
 from User_generator import generate
 from test import test
+import json
+import jsonschema
+from jsonschema import validate
+
+schema = {
+    "title": "email",
+    "description": "email",
+    "type": "object",
+    "properties":   {
+            "name":         {
+            "description": "name",
+            "type": "string"
+                            },
+            "password":     {
+            "description": "password",
+            "type": "string"
+                            },
+            "phone":        {
+            "description": "phone",
+            "type": "string"
+                            },
+            "required": ["name", "password", "phone"]
+                    },
+    "required": ["email"]
+}
+
+#     "productName": {
+#       "description": "Name of the product",
+#       "type": "string"
+#     },
+#     "price": {
+#       "description": "The price of the product",
+#       "type": "number",
+#       "exclusiveMinimum": 0
+#     },
+#     "tags": {
+#       "description": "Tags for the product",
+#       "type": "array",
+#       "items": {
+#         "type": "string"
+#       },
+#       "minItems": 1,
+#       "uniqueItems": true
+#     }
+#   },
+#   "required": [ "productId", "productName", "price" ]
+# }
 
 user_emails = []
 user_storage = {}
@@ -66,7 +114,7 @@ def menu():
             print("user_emails: ", user_emails)
             print("user_storage: ", user_storage)
         elif cmd == "4":
-            print("Выбрана 4 = delete user. Введите данные пользователя")
+            print("Выбрана 4 = delete user. Введите данные пользователя: ")
             email = input("Email: ")
             delete(email, user_storage, user_emails, email_have)
         elif cmd == "help":
@@ -81,23 +129,45 @@ def menu():
             while cmd3 != "0":
                 if cmd3 == "1":
                     print("Выбрана 1 = create file. Введите название файла: ")
-                    filename = input("Filename: ")
+                    print('Укажите директорию')
+                    directory = filedialog.askdirectory()
+                    filename = input('Введите имя файла: ')
+                    extension = input('Введите расширение: ')
+                    try:
+                        with open(directory + '/' + filename + '.' + extension, 'w') as tw:
+                            tw.write('')
+                            print("Файл создан: ", filename+"."+extension)
+                    except:
+                        print('Что-то пошло не так')
 
                 elif cmd3 == "2":
                     print("Выбрана 2 = read file")
-                    filename = input("Filename: ")
+                    print('Выберите файл')
+                    file_path = filedialog.askopenfilename()
+                    print(file_path)
+                    with open('out.txt', 'r', -1, 'utf-8') as inp:
+                        for i in inp.readlines():
+                            key, val = i.strip().split(':')
+                            user_storage[key] = val
 
                 elif cmd3 == "3":
                     print("Выбрана 3 = update file")
-                    filename = input("Filename: ")
+                    print('Выберите файл')
+                    file_path = filedialog.askopenfilename()
+                    print(file_path)
+                    with open(file_path, 'w', -1, 'utf-8') as out:
+                        for key, val in user_storage.items():
+                            out.write('{}:{}\n'.format(key, val))
 
                 elif cmd3 == "4":
                     print("Выбрана 4 = delete file")
-                    filename = input("Filename: ")
 
                 elif cmd3 == "5":
                     print("Выбрана 5 = show files")
-                    filename = input("Filename: ")
+                    path = '.'
+                    rez = sorted(os.listdir(path))
+                    for n, item in enumerate(rez):
+                        print(n + 1, item)
 
                 elif cmd3 == "help":
                     print(help3)
