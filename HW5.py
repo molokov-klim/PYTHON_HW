@@ -34,28 +34,6 @@ schema = {
     "required": ["email"]
 }
 
-#     "productName": {
-#       "description": "Name of the product",
-#       "type": "string"
-#     },
-#     "price": {
-#       "description": "The price of the product",
-#       "type": "number",
-#       "exclusiveMinimum": 0
-#     },
-#     "tags": {
-#       "description": "Tags for the product",
-#       "type": "array",
-#       "items": {
-#         "type": "string"
-#       },
-#       "minItems": 1,
-#       "uniqueItems": true
-#     }
-#   },
-#   "required": [ "productId", "productName", "price" ]
-# }
-
 user_emails = []
 user_storage = {}
 email_have = False
@@ -107,20 +85,25 @@ def menu():
                     print("Введенной команды не существует")
                     print(help2)
                 cmd2 = input("Вы в меню вывода пользователей. Введите команду ")
+
         elif cmd == "3":
             print("Выбрана 3 = update user. Введите данные пользователя")
             email = input("Email: ")
             update(email, user_emails, user_storage, email_have)
             print("user_emails: ", user_emails)
             print("user_storage: ", user_storage)
+
         elif cmd == "4":
             print("Выбрана 4 = delete user. Введите данные пользователя: ")
             email = input("Email: ")
             delete(email, user_storage, user_emails, email_have)
+
         elif cmd == "help":
             print(help)
+
         elif cmd == "test":
             test()
+
         elif cmd == "5":
             print("Выбрана 5 = file")
             help3 = ("1 = create file; 2 = read file; 3 = update file; 4 = delete file; 5 = show files; 0 = return to main menu; help = help")
@@ -171,8 +154,10 @@ def menu():
 
                 elif cmd3 == "help":
                     print(help3)
+
                 elif cmd3 == "exit":
                     sys.exit()
+
                 else:
                     print("Введенной команды не существует")
                     print(help3)
@@ -187,6 +172,7 @@ def menu():
         elif cmd == "":
             print("Введенной команды не существует")
             print(help)
+
         else:
             print("Введенной команды не существует")
             print(help)

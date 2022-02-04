@@ -1,5 +1,4 @@
 
-
 def delete(email, user_storage, user_emails, email_have):
     print("start delete")
     email_have = False
